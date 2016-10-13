@@ -70,7 +70,7 @@ public class InjectorProcessor  extends AbstractProcessor{
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         // 保存包含注解元素的目标类，注意是使用注解的外围类，主要用来处理父类继承，例：MainActivity
         Set<TypeElement> erasedTargetNames = new LinkedHashSet<>();
-        // TypeElement 使用注解的外围类，InjectClass 对应一个要生成的类
+        // TypeElement 使用注解的外围类， 对应一个要生成的类
         Map<TypeElement, InjectClass> targetClassMap = new LinkedHashMap<>();
 
         // 处理Bind
@@ -85,6 +85,9 @@ public class InjectorProcessor  extends AbstractProcessor{
         for (Map.Entry<TypeElement, InjectClass> entry : targetClassMap.entrySet()) {
             TypeElement typeElement = entry.getKey();
             InjectClass injectClass = entry.getValue();
+
+            _log(typeElement,"second step type element = %s ",typeElement);
+            _log(typeElement,"second step type element simple name = %s ",typeElement.getSimpleName());
 
             // 查看是否父类也进行注解绑定，有则添加到BindingClass
             TypeElement parentType = _findParentType(typeElement, erasedTargetNames);

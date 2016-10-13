@@ -75,6 +75,9 @@ public final class ParseHelper {
     private static InjectClass _getOrCreateTargetClass(Element element, Map<TypeElement, InjectClass> targetClassMap,
                                                        Elements elementUtils, Messager messager) {
         TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
+
+        _log(messager,enclosingElement,"_getOrCreateTargetClass enclosingElement = %s ",enclosingElement.getSimpleName());
+
         InjectClass injectClass = targetClassMap.get(enclosingElement);
         // 以下以 com.butterknife.MainActivity 这个类为例
         if (injectClass == null) {
